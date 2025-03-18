@@ -1,21 +1,25 @@
-// import './App.css';
 import { useTranslation } from 'react-i18next';
 
 function Language() {
-  const { t, i18n } = useTranslation();
-  const changeLanguage = (lang: string) => {
+  const { i18n } = useTranslation();
+  const changeLanguage = () => {
+    const lang = i18n.language === 'en' ? 'zh' : 'en';
     i18n.changeLanguage(lang);
   };
 
   return (
     <>
-      <div>
-        <h1>{t('Ansel & Nicole')}</h1>
-        <p>{'#NICANS2025'}</p>
-
-        <button onClick={() => changeLanguage('en')}>English</button>
-        <button onClick={() => changeLanguage('zh')}>中文</button>
-      </div>
+      <button
+        style={{
+          backgroundColor: 'transparent',
+          color: 'var(--button-color)',
+          fontSize: '16px',
+          border: 'none',
+        }}
+        onClick={() => changeLanguage()}
+      >
+        {i18n.language === 'en' ? 'ENG' : '中文'}
+      </button>
     </>
   );
 }

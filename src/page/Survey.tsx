@@ -15,14 +15,18 @@ interface ResponseType {
 const questions: QuestionType[] = [
   { id: 1, text: 'start-prompt', type: 'text' },
   { id: 2, text: 'color-pick', type: 'slider' },
+  { id: 3, text: 'nicole-time', type: 'text' },
+  { id: 4, text: 'ansel-time', type: 'text' },
 ];
 
 const Survey = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState<ResponseType>({});
   const { t } = useTranslation();
+  const [isNext, setIsNext] = useState(true);
 
   const handleNext = () => {
+    setIsNext(true);
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
@@ -30,7 +34,13 @@ const Survey = () => {
       alert('Survey Complete! Check the console for responses.');
     }
   };
+  /*************  ✨ Codeium Command ⭐  *************/
+  /**
+   * Goes back to the previous question. If this is the first question, nothing happens.
+   */
+  /******  b30d3cd8-facc-4ca2-b904-41f0c1f28a7c  *******/
   const handleBack = () => {
+    setIsNext(false);
     if (currentQuestion > 0) {
       setCurrentQuestion((prev) => prev - 1);
     }
@@ -49,7 +59,6 @@ const Survey = () => {
       return (
         <input
           type="text"
-          className="border p-2 w-full rounded-md mb-4"
           value={responses[question.id] || ''}
           onChange={handleInputChange}
         />
@@ -62,7 +71,6 @@ const Survey = () => {
           type="range"
           min="1"
           max="100"
-          className="w-full mb-4"
           value={responses[question.id] || 5}
           onChange={handleInputChange}
         />
@@ -71,35 +79,41 @@ const Survey = () => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto border rounded-lg shadow-md">
-      <motion.div
-        key={currentQuestion} // Ensures animation runs when content changes
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -100 }}
-        transition={{ duration: 0.3 }}
-      >
-        <h1 className="text-xl font-bold mb-4">
-          {t(questions[currentQuestion].text)}
-        </h1>
+    <motion.div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--container-padding)',
+      }}
+      key={currentQuestion} // Ensures animation runs when content changes
+      initial={{ opacity: 0, x: isNext ? 100 : -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: isNext ? -100 : 100 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div>
+        <h2>{t(questions[currentQuestion].text)}</h2>
         {renderInput()}
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: 'var(--container-padding)',
+        }}
+      >
         <button
+          className="selection-button"
           onClick={handleBack}
-          className={`bg-gray-400 text-white px-4 py-2 rounded-md ${
-            currentQuestion === 0 ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
           disabled={currentQuestion === 0}
         >
           Back
         </button>
-        <button
-          onClick={handleNext}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
-        >
+        <button className="selection-button" onClick={handleNext}>
           {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
         </button>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

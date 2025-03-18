@@ -1,13 +1,11 @@
 import './App.css';
-import Language from './page/Language';
-import Survey from './page/Survey';
+import GridFile from './GridFile';
 
 function App() {
   return (
-    <>
-      <Language />
-      <Survey />
-    </>
+    <div style={{ width: '100vw' }}>
+      <GridFile />
+    </div>
   );
 }
 
