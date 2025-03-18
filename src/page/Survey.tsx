@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { ArrowForward, ArrowBack } from '@mui/icons-material';
 interface QuestionType {
   id: number;
   text: string;
@@ -79,22 +79,23 @@ const Survey = () => {
   };
 
   return (
-    <motion.div
+    <div
       style={{
         display: 'flex',
         flexDirection: 'column',
         gap: 'var(--container-padding)',
       }}
-      key={currentQuestion} // Ensures animation runs when content changes
-      initial={{ opacity: 0, x: isNext ? 100 : -100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: isNext ? -100 : 100 }}
-      transition={{ duration: 0.3 }}
     >
-      <div>
+      <motion.div
+        key={currentQuestion} // Ensures animation runs when content changes
+        initial={{ opacity: 0, x: isNext ? 100 : -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: isNext ? -100 : 100 }}
+        transition={{ duration: 0.3 }}
+      >
         <h2>{t(questions[currentQuestion].text)}</h2>
         {renderInput()}
-      </div>
+      </motion.div>
       <div
         style={{
           display: 'flex',
@@ -107,13 +108,17 @@ const Survey = () => {
           onClick={handleBack}
           disabled={currentQuestion === 0}
         >
-          Back
+          <ArrowBack style={{ fontSize: '16px' }} />
         </button>
         <button className="selection-button" onClick={handleNext}>
-          {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
+          {currentQuestion < questions.length - 1 ? (
+            <ArrowForward style={{ fontSize: '16px' }} />
+          ) : (
+            t('Submit')
+          )}
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

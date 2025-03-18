@@ -13,3 +13,16 @@
   gap: 32px;
   padding: var(--container-padding);
 }
+
+.selection-button {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  padding: 1em;
+  font-family: inherit;
+  display: flex;
+  justify-content: center;
+  font-size: var(--text-font);
+  background-color: var(--button-color);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}

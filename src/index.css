@@ -1,5 +1,4 @@
 :root {
-  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-family: 'Averia Serif Libre', serif;
   line-height: 1.5;
   font-weight: 400;
@@ -10,6 +9,7 @@
   background-color: #f5ebe1;
 
   --button-color: #423f3f;
+  --text-font: 16px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -48,23 +48,6 @@ p {
   font-size: 24px;
   margin-top: 0px;
   margin-bottom: 8px;
-}
-
-.selection-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-family: inherit;
-  background-color: var(--button-color);
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-.selection-button:hover {
-  border-color: #646cff;
-}
-.selection-button:focus,
-.selection-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
