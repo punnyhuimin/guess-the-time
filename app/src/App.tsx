@@ -3,7 +3,7 @@ import GridFile from './GridFile';
 
 function App() {
   return (
-    <div style={{ width: '100vw' }}>
+    <div>
       <GridFile />
     </div>
   );
