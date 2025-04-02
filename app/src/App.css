@@ -13,42 +13,44 @@ body {
   margin: 0 auto;
   text-align: center;
   --container-padding: 16px;
+  --input-color: #a79d9d;
+  --button-height: 50px;
 }
 
 .container {
   display: grid;
   grid-auto-flow: row;
   gap: 32px;
-  padding: var(--container-padding);
+  padding: calc(2 * var(--container-padding));
+}
+
+.text-input {
+  border-radius: 1em;
+  border: 1px solid transparent;
+  padding: 1em;
+  font-family: inherit;
+  text-align: center;
+  font-size: var(--text-font);
+  background-color: var(--input-color);
+}
+
+.submit-button {
+  border-radius: 1em;
+  border: 1px solid transparent;
+  padding: 14px;
+  height: var(--button-height);
+  width: calc(2 * var(--button-height));
+  font-size: var(--text-font);
+  background-color: var(--button-color);
 }
 
 .selection-button {
   border: 1px solid transparent;
   border-radius: 10%;
   padding: 1em;
-  width: 110px;
-  font-family: inherit;
-  display: flex;
-  justify-content: center;
+  height: var(--button-height);
+  width: var(--button-height);
+  display: block;
   font-size: var(--text-font);
   background-color: var(--button-color);
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-.back-button {
-  background-color: transparent;
-  color: black;
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 110px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: var(--text-font);
-  transition: opacity 0.25s;
-
-  &:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
-  }
 }
