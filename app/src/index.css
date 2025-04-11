@@ -4,7 +4,7 @@
   font-weight: 400;
   font-size: 32px;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
   color: #000000;
   background-color: #f5ebe1;
 
@@ -34,6 +34,14 @@ body {
   min-height: 100vh;
 }
 
+button {
+  color: #ffffff;
+}
+
+button:disabled {
+  color: grey;
+}
+
 h1 {
   font-size: 32px;
   line-height: 1.1;
@@ -50,7 +58,7 @@ p {
   margin-bottom: 8px;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -61,4 +69,4 @@ p {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
