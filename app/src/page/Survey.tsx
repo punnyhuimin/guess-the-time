@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
+import { submitGuess } from '../api';
 interface QuestionType {
   id: number;
   text: string;
@@ -9,14 +10,14 @@ interface QuestionType {
 }
 
 interface ResponseType {
-  [key: number]: string;
+  [key: number]: string | number;
 }
 
 const questions: QuestionType[] = [
   { id: 1, text: 'start-prompt', type: 'text' },
   { id: 2, text: 'color-pick', type: 'slider' },
-  { id: 3, text: 'nicole-time', type: 'text' },
-  { id: 4, text: 'ansel-time', type: 'text' },
+  { id: 3, text: 'nicole-time', type: 'number' },
+  { id: 4, text: 'ansel-time', type: 'number' },
 ];
 
 const Survey = () => {
@@ -25,13 +26,23 @@ const Survey = () => {
   const { t } = useTranslation();
   const [isNext, setIsNext] = useState(true);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     setIsNext(true);
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       console.log('Survey Complete:', responses);
-      alert('Survey Complete! Check the console for responses.');
+      const name = responses[1] as string;
+      const timeN = responses[3] as number;
+      const timeA = responses[4] as number;
+
+      try {
+        await submitGuess(name, timeA, timeN);
+        alert('Submitted! 🎉');
+      } catch (error) {
+        console.error('Failed to submit guess', error);
+        alert('Something went wrong. ❌');
+      }
     }
   };
   /*************  ✨ Codeium Command ⭐  *************/
@@ -59,6 +70,16 @@ const Survey = () => {
       return (
         <input
           type="text"
+          value={responses[question.id] || ''}
+          onChange={handleInputChange}
+        />
+      );
+    }
+
+    if (question.type === 'number') {
+      return (
+        <input
+          type="number"
           value={responses[question.id] || ''}
           onChange={handleInputChange}
         />

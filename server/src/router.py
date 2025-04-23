@@ -7,7 +7,8 @@ router = APIRouter()
 
 class UserInput(BaseModel):
     name: str = Field(..., example="Alice")
-    time: int = Field(..., example=125, description="Time in seconds")
+    timeA: int = Field(..., example=125, description="Time in seconds")
+    timeN: int = Field(..., example=125, description="Time in seconds")
 
 @router.get("/guesses")
 async def read_guesses():
@@ -20,7 +21,8 @@ async def submit_input(data: UserInput):
     return {
         "message": "Input received",
         "name": data.name,
-        "time_in_seconds": data.time
+        "timeA": data.timeA,
+        "timeN": data.timeN
     }
 
 @router.get("/ping")
