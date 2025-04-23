@@ -16,7 +16,6 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers (Authorization, Content-Type, etc.)
 )
 
-
 # Startup and shutdown event handlers
 async def startup_db():
     await mongo.connect()
