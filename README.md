@@ -1,6 +1,6 @@
 # Guess The Time App
 
-## Origin and Goal
+## Origin
 This app is a fun guessing game designed for a wedding event. Users will enter their name along with two guesses—**timeA** and **timeN**—predicting how long the speeches of the bride and groom (A and N) will be. The game will be part of the entertainment, allowing the audience to make their predictions and enjoy the event.
 
 ## Tech Stack
@@ -18,9 +18,10 @@ This app is a fun guessing game designed for a wedding event. Users will enter t
 
 ## How to Run Locally
 
-1. Clone this repository:
-2. cd to the location this repo is stored on your machine and run `docker-compose up --build`
-3. Alternatively, if you want to run without Docker, use the following
+1. Clone this repository
+2. Add a .env file in the server directory that contains your MongoDB credentials and database name
+3. cd to the location this repo is stored on your machine and run `docker-compose up --build`
+4. Alternatively, if you want to run without Docker, use the following
    - navigate to the server: `cd server`
    - install dependencies: `pip install -r requirements.txt`
    - navigate to the ui: `cd app`
