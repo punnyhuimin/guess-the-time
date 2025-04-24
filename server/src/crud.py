@@ -11,7 +11,8 @@ def serialize_guess(guess) -> dict:
     return {
         "id": str(guess["_id"]),
         "name": guess["name"],
-        "time": guess["time"]
+        "timeA": guess["timeA"],
+        "timeN": guess["timeN"],
     }
 
 async def get_all_guesses():
