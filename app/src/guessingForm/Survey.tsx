@@ -1,16 +1,9 @@
 import { motion } from 'motion/react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { submitGuess } from '../api';
-interface QuestionType {
-  id: number;
-  text: string;
-  type: string;
-}
-
-interface ResponseType {
-  [key: number]: string | number;
-}
+import { useNavigate } from 'react-router-dom';
+import { submitGuess } from '../services/submitGuess';
+import { QuestionType, ResponseType } from '../types';
 
 const questions: QuestionType[] = [
   { id: 1, text: 'start-prompt', type: 'text' },
@@ -25,6 +18,7 @@ const Survey = () => {
     nicole: { minutes: 0, seconds: 0 },
     ansel: { minutes: 0, seconds: 0 },
   });
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
   const [isNext, setIsNext] = useState(true);
@@ -44,7 +38,7 @@ const Survey = () => {
 
         try {
           await submitGuess(name, timeA, timeN);
-          alert('Submitted! 🎉');
+          navigate('/results');
         } catch (error) {
           console.error('Failed to submit guess', error);
           alert('Something went wrong. ❌');

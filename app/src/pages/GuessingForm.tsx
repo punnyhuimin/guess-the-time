@@ -1,9 +1,10 @@
-import './App.css';
-import Language from './page/Language';
-import Survey from './page/Survey';
-import Title from './page/Title';
+import React from 'react';
+import '../App.css';
+import Language from '../guessingForm/Language';
+import Survey from '../guessingForm/Survey';
+import Title from '../guessingForm/Title';
 
-function GridFile() {
+const GuessingForm: React.FC = () => {
   return (
     <div className="container">
       <div
@@ -23,6 +24,6 @@ function GridFile() {
       </div>
     </div>
   );
-}
+};
 
-export default GridFile;
+export default GuessingForm;

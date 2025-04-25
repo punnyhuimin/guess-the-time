@@ -1,12 +1,8 @@
 import './App.css';
-import GridFile from './GridFile';
+import AppRouter from './router';
 
 function App() {
-  return (
-    <div>
-      <GridFile />
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default App;
