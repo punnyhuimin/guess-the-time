@@ -15,14 +15,18 @@ interface ResponseType {
 
 const questions: QuestionType[] = [
   { id: 1, text: 'start-prompt', type: 'text' },
-  { id: 2, text: 'color-pick', type: 'slider' },
-  { id: 3, text: 'nicole-time', type: 'number' },
-  { id: 4, text: 'ansel-time', type: 'number' },
+  { id: 2, text: 'nicole-time', type: 'time' },
+  { id: 3, text: 'ansel-time', type: 'time' },
 ];
 
 const Survey = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState<ResponseType>({});
+  const [times, setTimes] = useState({
+    nicole: { minutes: 0, seconds: 0 },
+    ansel: { minutes: 0, seconds: 0 },
+  });
+
   const { t } = useTranslation();
   const [isNext, setIsNext] = useState(true);
 
@@ -33,8 +37,8 @@ const Survey = () => {
     } else {
       console.log('Survey Complete:', responses);
       const name = responses[1] as string;
-      const timeN = responses[3] as number;
-      const timeA = responses[4] as number;
+      const timeN = times.nicole.minutes * 60 + times.nicole.seconds;
+      const timeA = times.ansel.minutes * 60 + times.ansel.seconds;
 
       try {
         await submitGuess(name, timeA, timeN);
@@ -45,11 +49,7 @@ const Survey = () => {
       }
     }
   };
-  /*************  ✨ Codeium Command ⭐  *************/
-  /**
-   * Goes back to the previous question. If this is the first question, nothing happens.
-   */
-  /******  b30d3cd8-facc-4ca2-b904-41f0c1f28a7c  *******/
+
   const handleBack = () => {
     setIsNext(false);
     if (currentQuestion > 0) {
@@ -61,6 +61,28 @@ const Survey = () => {
       ...responses,
       [questions[currentQuestion].id]: e.target.value,
     });
+  };
+
+  const handleMinuteChange = (person: 'nicole' | 'ansel', value: number) => {
+    setTimes((prev) => ({
+      ...prev,
+      [person]: {
+        ...prev[person],
+        minutes: value,
+      },
+    }));
+    console.log(times);
+  };
+
+  const handleSecondChange = (person: 'nicole' | 'ansel', value: number) => {
+    setTimes((prev) => ({
+      ...prev,
+      [person]: {
+        ...prev[person],
+        seconds: value,
+      },
+    }));
+    console.log(times);
   };
 
   const renderInput = () => {
@@ -76,25 +98,47 @@ const Survey = () => {
       );
     }
 
-    if (question.type === 'number') {
-      return (
-        <input
-          type="number"
-          value={responses[question.id] || ''}
-          onChange={handleInputChange}
-        />
-      );
-    }
+    if (question.id === 2 || question.id === 3) {
+      const personKey = question.id === 2 ? 'nicole' : 'ansel';
 
-    if (question.type === 'slider') {
       return (
-        <input
-          type="range"
-          min="1"
-          max="100"
-          value={responses[question.id] || 5}
-          onChange={handleInputChange}
-        />
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <label>
+            Minutes:
+            <select
+              key={times[personKey].minutes}
+              value={times[personKey].minutes}
+              onChange={(e) =>
+                handleMinuteChange(personKey, Number(e.target.value))
+              }
+              style={{ color: 'black' }}
+            >
+              {Array.from({ length: 60 }, (_, i) => (
+                <option key={i} value={i}>
+                  {i}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Seconds:
+            <select
+              key={times[personKey].seconds}
+              value={times[personKey].seconds}
+              onChange={(e) =>
+                handleSecondChange(personKey, Number(e.target.value))
+              }
+              style={{ color: 'black' }}
+            >
+              {Array.from({ length: 60 }, (_, i) => (
+                <option key={i} value={i}>
+                  {i}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
       );
     }
   };
