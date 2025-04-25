@@ -102,7 +102,7 @@ const Survey = () => {
       const personKey = question.id === 2 ? 'nicole' : 'ansel';
 
       return (
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <label style={{ fontSize: '24px' }}>
             Minutes:
             <select
@@ -123,7 +123,7 @@ const Survey = () => {
                 fontSize: '14px',
                 cursor: 'pointer',
                 height: '24px',
-                width: '70px',
+                width: '48px',
                 position: 'relative',
                 backgroundImage:
                   "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E\")",
@@ -159,7 +159,7 @@ const Survey = () => {
                 fontSize: '14px',
                 cursor: 'pointer',
                 height: '24px',
-                width: '70px',
+                width: '48px',
                 position: 'relative',
                 backgroundImage:
                   "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E\")",
@@ -206,18 +206,14 @@ const Survey = () => {
         }}
       >
         <button
-          className="selection-button"
+          className="back-button"
           onClick={handleBack}
           disabled={currentQuestion === 0}
         >
-          <ArrowBack style={{ fontSize: '16px' }} />
+          BACK
         </button>
         <button className="selection-button" onClick={handleNext}>
-          {currentQuestion < questions.length - 1 ? (
-            <ArrowForward style={{ fontSize: '16px' }} />
-          ) : (
-            t('Submit')
-          )}
+          {currentQuestion < questions.length - 1 ? 'NEXT' : t('SUBMIT')}
         </button>
       </div>
     </div>
