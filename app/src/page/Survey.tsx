@@ -103,7 +103,7 @@ const Survey = () => {
 
       return (
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <label>
+          <label style={{ fontSize: '24px' }}>
             Minutes:
             <select
               key={times[personKey].minutes}
@@ -111,17 +111,35 @@ const Survey = () => {
               onChange={(e) =>
                 handleMinuteChange(personKey, Number(e.target.value))
               }
-              style={{ color: 'black' }}
+              style={{
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                backgroundColor: 'var(--button-color)',
+                color: 'white',
+                padding: '4px 4px',
+                borderRadius: '6px',
+                border: '1px solid #ccc',
+                fontSize: '14px',
+                cursor: 'pointer',
+                height: '24px',
+                width: '70px',
+                position: 'relative',
+                backgroundImage:
+                  "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 10px center',
+                backgroundSize: '10px',
+              }}
             >
-              {Array.from({ length: 60 }, (_, i) => (
+              {Array.from({ length: 10 }, (_, i) => (
                 <option key={i} value={i}>
                   {i}
                 </option>
               ))}
             </select>
           </label>
-
-          <label>
+          <label style={{ fontSize: '24px' }}>
             Seconds:
             <select
               key={times[personKey].seconds}
@@ -129,7 +147,26 @@ const Survey = () => {
               onChange={(e) =>
                 handleSecondChange(personKey, Number(e.target.value))
               }
-              style={{ color: 'black' }}
+              style={{
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                backgroundColor: 'var(--button-color)',
+                color: 'white',
+                padding: '4px 4px',
+                borderRadius: '6px',
+                border: '1px solid #ccc',
+                fontSize: '14px',
+                cursor: 'pointer',
+                height: '24px',
+                width: '70px',
+                position: 'relative',
+                backgroundImage:
+                  "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 10px center',
+                backgroundSize: '10px',
+              }}
             >
               {Array.from({ length: 60 }, (_, i) => (
                 <option key={i} value={i}>
