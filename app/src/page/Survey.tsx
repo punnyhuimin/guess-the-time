@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import { submitGuess } from '../api';
 interface QuestionType {
   id: number;
@@ -35,17 +34,21 @@ const Survey = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      console.log('Survey Complete:', responses);
-      const name = responses[1] as string;
-      const timeN = times.nicole.minutes * 60 + times.nicole.seconds;
-      const timeA = times.ansel.minutes * 60 + times.ansel.seconds;
+      const isConfirmed = window.confirm(
+        'Are you sure you want to submit your guess?',
+      );
+      if (isConfirmed) {
+        const name = responses[1] as string;
+        const timeN = times.nicole.minutes * 60 + times.nicole.seconds;
+        const timeA = times.ansel.minutes * 60 + times.ansel.seconds;
 
-      try {
-        await submitGuess(name, timeA, timeN);
-        alert('Submitted! 🎉');
-      } catch (error) {
-        console.error('Failed to submit guess', error);
-        alert('Something went wrong. ❌');
+        try {
+          await submitGuess(name, timeA, timeN);
+          alert('Submitted! 🎉');
+        } catch (error) {
+          console.error('Failed to submit guess', error);
+          alert('Something went wrong. ❌');
+        }
       }
     }
   };
