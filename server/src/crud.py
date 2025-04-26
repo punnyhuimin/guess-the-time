@@ -19,3 +19,23 @@ async def get_all_guesses():
     collection = mongo.db["guesses"]
     cursor = collection.find()
     return [serialize_guess(g) async for g in cursor]
+
+async def get_winners():
+    target_value = 1000
+    pipeline = [
+        {
+            "$addFields": {
+                "diff": { "$abs": { "$subtract": ["$guessedTimeInMs", target_value] } }
+            }
+        },
+        { "$sort": { "diff": 1 } },
+        { "$limit": 3 },
+        {
+            "$project": {"_id": 0, "name": 1, "guessedTimeInMs": 1, "diff": 1}
+        }
+    ]
+
+    cursor = mongo.db["guesses"].aggregate(pipeline)
+    results = await cursor.to_list(length=3)
+    
+    return results

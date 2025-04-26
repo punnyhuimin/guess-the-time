@@ -40,7 +40,7 @@ const Survey = () => {
           inputTime.milliseconds;
         try {
           await submitGuess(name, guessedTimeInMs);
-          navigate('/results');
+          navigate('/guesses');
         } catch (error) {
           console.error('Failed to submit guess', error);
           alert('Something went wrong. ❌');

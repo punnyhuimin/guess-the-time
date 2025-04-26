@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
-from src.crud import get_all_guesses, save_guess
+from src.crud import get_all_guesses, save_guess, get_winners
 
 router = APIRouter()
 
@@ -13,6 +13,11 @@ class UserInput(BaseModel):
 async def read_guesses():
     guesses = await get_all_guesses()
     return {"guesses": guesses}
+
+@router.get("/results")
+async def get_results():
+    winners = await get_winners()
+    return {"winners": winners}
 
 @router.post("/submit")
 async def submit_input(data: UserInput):
