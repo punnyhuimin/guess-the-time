@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface TimeSelectProps {
   inputTime: number;
@@ -11,6 +12,8 @@ const TimeSelect: FC<TimeSelectProps> = ({
   inputTimeField,
   handleTimeInputChange,
 }) => {
+  const { t } = useTranslation();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const number = Number(value);
@@ -29,7 +32,7 @@ const TimeSelect: FC<TimeSelectProps> = ({
         width: '200px', // !TODO hardcoded ok?
       }}
     >
-      <span style={{ fontSize: '24px' }}>{inputTimeField}:</span>
+      <span style={{ fontSize: '24px' }}>{t(inputTimeField)}:</span>
       <input
         type="text"
         value={inputTime}
