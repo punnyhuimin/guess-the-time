@@ -4,19 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { submitGuess } from '../services/submitGuess';
 import { QuestionType, ResponseType } from '../types';
+import TimeSelect from './TimeInput';
 
 const questions: QuestionType[] = [
   { id: 1, text: 'start-prompt', type: 'text' },
-  { id: 2, text: 'nicole-time', type: 'time' },
-  { id: 3, text: 'ansel-time', type: 'time' },
+  { id: 2, text: 'time-prompt', type: 'time' },
 ];
 
 const Survey = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState<ResponseType>({});
-  const [times, setTimes] = useState({
-    nicole: { minutes: 0, seconds: 0 },
-    ansel: { minutes: 0, seconds: 0 },
+  const [inputTime, setInputTime] = useState({
+    minutes: 0,
+    seconds: 0,
+    milliseconds: 0,
   });
   const navigate = useNavigate();
 
@@ -33,11 +34,12 @@ const Survey = () => {
       );
       if (isConfirmed) {
         const name = responses[1] as string;
-        const timeN = times.nicole.minutes * 60 + times.nicole.seconds;
-        const timeA = times.ansel.minutes * 60 + times.ansel.seconds;
-
+        const guessedTimeInMs =
+          inputTime.minutes * 60 * 1000 +
+          inputTime.seconds * 1000 +
+          inputTime.milliseconds;
         try {
-          await submitGuess(name, timeA, timeN);
+          await submitGuess(name, guessedTimeInMs);
           navigate('/results');
         } catch (error) {
           console.error('Failed to submit guess', error);
@@ -53,33 +55,18 @@ const Survey = () => {
       setCurrentQuestion((prev) => prev - 1);
     }
   };
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setResponses({
       ...responses,
       [questions[currentQuestion].id]: e.target.value,
     });
   };
 
-  const handleMinuteChange = (person: 'nicole' | 'ansel', value: number) => {
-    setTimes((prev) => ({
+  const handleTimeInputChange = (field: string, value: number) => {
+    setInputTime((prev) => ({
       ...prev,
-      [person]: {
-        ...prev[person],
-        minutes: value,
-      },
+      [field]: value,
     }));
-    console.log(times);
-  };
-
-  const handleSecondChange = (person: 'nicole' | 'ansel', value: number) => {
-    setTimes((prev) => ({
-      ...prev,
-      [person]: {
-        ...prev[person],
-        seconds: value,
-      },
-    }));
-    console.log(times);
   };
 
   const renderInput = () => {
@@ -90,88 +77,42 @@ const Survey = () => {
         <input
           type="text"
           value={responses[question.id] || ''}
-          onChange={handleInputChange}
+          onChange={handleNameInputChange}
         />
       );
     }
 
-    if (question.id === 2 || question.id === 3) {
-      const personKey = question.id === 2 ? 'nicole' : 'ansel';
-
+    if (question.type === 'time') {
       return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <label style={{ fontSize: '24px' }}>
-            Minutes:
-            <select
-              key={times[personKey].minutes}
-              value={times[personKey].minutes}
-              onChange={(e) =>
-                handleMinuteChange(personKey, Number(e.target.value))
-              }
-              style={{
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none',
-                backgroundColor: 'var(--button-color)',
-                color: 'white',
-                padding: '4px 4px',
-                borderRadius: '6px',
-                border: '1px solid #ccc',
-                fontSize: '14px',
-                cursor: 'pointer',
-                height: '24px',
-                width: '48px',
-                position: 'relative',
-                backgroundImage:
-                  "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E\")",
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 10px center',
-                backgroundSize: '10px',
-              }}
-            >
-              {Array.from({ length: 10 }, (_, i) => (
-                <option key={i} value={i}>
-                  {i}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label style={{ fontSize: '24px' }}>
-            Seconds:
-            <select
-              key={times[personKey].seconds}
-              value={times[personKey].seconds}
-              onChange={(e) =>
-                handleSecondChange(personKey, Number(e.target.value))
-              }
-              style={{
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none',
-                backgroundColor: 'var(--button-color)',
-                color: 'white',
-                padding: '4px 4px',
-                borderRadius: '6px',
-                border: '1px solid #ccc',
-                fontSize: '14px',
-                cursor: 'pointer',
-                height: '24px',
-                width: '48px',
-                position: 'relative',
-                backgroundImage:
-                  "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E\")",
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 10px center',
-                backgroundSize: '10px',
-              }}
-            >
-              {Array.from({ length: 60 }, (_, i) => (
-                <option key={i} value={i}>
-                  {i}
-                </option>
-              ))}
-            </select>
-          </label>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div>
+            <TimeSelect
+              inputTime={inputTime.minutes}
+              inputTimeField={'minutes'}
+              handleTimeInputChange={handleTimeInputChange}
+            />
+          </div>
+          <div>
+            <TimeSelect
+              inputTime={inputTime.seconds}
+              inputTimeField={'seconds'}
+              handleTimeInputChange={handleTimeInputChange}
+            />
+          </div>
+          <div>
+            <TimeSelect
+              inputTime={inputTime.milliseconds}
+              inputTimeField={'milliseconds'}
+              handleTimeInputChange={handleTimeInputChange}
+            />
+          </div>
         </div>
       );
     }

@@ -2,7 +2,5 @@
   "welcome": "Welcome",
   "attendees": "Attendees",
   "start-prompt": "Let's start with your name",
-  "color-pick": "Please key in or choose your preferred color",
-  "nicole-time": "How long will Nicole's speech take?",
-  "ansel-time": "How long will Ansel's speech take?"
+  "time-prompt": "Guess the total time the speeches will take"
 }

@@ -1,0 +1,53 @@
+import { FC } from 'react';
+
+interface TimeSelectProps {
+  inputTime: number;
+  inputTimeField: string;
+  handleTimeInputChange: (field: string, value: number) => void;
+}
+
+const TimeSelect: FC<TimeSelectProps> = ({
+  inputTime,
+  inputTimeField,
+  handleTimeInputChange,
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const number = Number(value);
+    if (!isNaN(number)) {
+      handleTimeInputChange(inputTimeField, number);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '8px',
+        width: '200px', // !TODO hardcoded ok?
+      }}
+    >
+      <span style={{ fontSize: '24px' }}>{inputTimeField}:</span>
+      <input
+        type="text"
+        value={inputTime}
+        onChange={handleChange}
+        style={{
+          backgroundColor: 'var(--button-color)',
+          color: 'white',
+          padding: '4px 4px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          fontSize: '14px',
+          height: '24px',
+          width: '24px',
+          textAlign: 'right',
+        }}
+      />
+    </div>
+  );
+};
+
+export default TimeSelect;

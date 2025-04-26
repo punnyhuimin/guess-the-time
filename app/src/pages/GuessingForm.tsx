@@ -6,7 +6,7 @@ import Title from '../guessingForm/Title';
 
 const GuessingForm: React.FC = () => {
   return (
-    <div className="container">
+    <div className="container" style={{ minWidth: '100%' }}>
       <div
         style={{
           display: 'flex',

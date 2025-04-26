@@ -1,7 +1,6 @@
 export interface Guess {
   name: string;
-  timeA: number;
-  timeN: number;
+  guessedTimeInMs: number;
 }
 
 export interface QuestionType {

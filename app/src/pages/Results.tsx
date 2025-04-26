@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getResults } from '../services/getResults';
 import { Guess } from '../types';
-import { formatTime } from '../utils';
+import { formatMsToString } from '../utils';
 
 const GuessTable: React.FC = () => {
   const [guesses, setGuesses] = useState<Guess[]>([]);
@@ -31,16 +31,16 @@ const GuessTable: React.FC = () => {
         <thead>
           <tr>
             <th style={tableHeaderStyle}>Name</th>
-            <th style={tableHeaderStyle}>Ansel</th>
-            <th style={tableHeaderStyle}>Nicole</th>
+            <th style={tableHeaderStyle}>Guessed Time</th>
           </tr>
         </thead>
         <tbody>
           {guesses.map((guess, index) => (
             <tr key={index}>
               <td style={tableCellStyle}>{guess.name}</td>
-              <td style={tableCellStyle}>{formatTime(guess.timeA)}</td>
-              <td style={tableCellStyle}>{formatTime(guess.timeN)}</td>
+              <td style={tableCellStyle}>
+                {formatMsToString(guess.guessedTimeInMs)}
+              </td>
             </tr>
           ))}
         </tbody>
