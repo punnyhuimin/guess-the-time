@@ -16,8 +16,9 @@ async def read_guesses():
 
 @router.get("/results")
 async def get_results():
-    winners = await get_winners()
-    return {"winners": winners}
+    correct_answer = 1000 # TODO CHANGE THIS
+    winners = await get_winners(correct_answer)
+    return {"correct_answer": correct_answer, "winners": winners}
 
 @router.post("/submit")
 async def submit_input(data: UserInput):

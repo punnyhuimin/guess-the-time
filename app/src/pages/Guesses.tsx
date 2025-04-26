@@ -24,7 +24,12 @@ const Guesses: React.FC = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  return <GuessTable guesses={guesses} />;
+  return (
+    <div>
+      <h2>Guesses</h2>
+      <GuessTable guesses={guesses} />;
+    </div>
+  );
 };
 
 export default Guesses;

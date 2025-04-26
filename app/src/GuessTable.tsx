@@ -4,6 +4,7 @@ import { formatMsToString } from './utils';
 
 interface GuessTableProps {
   guesses: Guess[];
+  isResultsTable?: boolean;
 }
 
 const tableHeaderStyle = {
@@ -19,15 +20,18 @@ const tableCellStyle = {
   textAlign: 'left' as 'left',
 };
 
-const GuessTable: FC<GuessTableProps> = ({ guesses }) => {
+const GuessTable: FC<GuessTableProps> = ({
+  guesses,
+  isResultsTable = false,
+}) => {
   return (
     <div style={{ margin: '20px' }}>
-      <h2>Guesses</h2>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>
             <th style={tableHeaderStyle}>Name</th>
             <th style={tableHeaderStyle}>Guessed Time</th>
+            {isResultsTable && <th style={tableHeaderStyle}>Difference</th>}
           </tr>
         </thead>
         <tbody>
@@ -37,6 +41,9 @@ const GuessTable: FC<GuessTableProps> = ({ guesses }) => {
               <td style={tableCellStyle}>
                 {formatMsToString(guess.guessedTimeInMs)}
               </td>
+              {isResultsTable && (
+                <td style={tableCellStyle}>{formatMsToString(guess.diff!)}</td>
+              )}
             </tr>
           ))}
         </tbody>
