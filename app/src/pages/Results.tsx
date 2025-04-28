@@ -26,11 +26,15 @@ const Results: React.FC = () => {
 
   if (loading || _.isNil(winnerResults)) return <div>Loading...</div>;
 
+  if (!winnerResults || winnerResults.correct_answer === null) {
+    return <div>Results not in yet!</div>;
+  }
+
   return (
     <div>
       <h2>Results</h2>
       <h3>Speech Length: {formatMsToString(winnerResults.correct_answer)}</h3>
-      <GuessTable guesses={winnerResults?.winners} isResultsTable={true} />;
+      <GuessTable guesses={winnerResults?.winners} isResultsTable={true} />
     </div>
   );
 };

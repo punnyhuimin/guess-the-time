@@ -20,11 +20,24 @@ async def get_all_guesses():
     cursor = collection.find()
     return [serialize_guess(g) async for g in cursor]
 
-async def get_winners(correct_answer):
+async def get_winners():
+    correct_answer_doc = await mongo.db["guesses"].find_one({"name": "correct_answer_123"})
+
+    if not correct_answer_doc:
+        return {
+            "correct_answer": None,
+            "winners": []
+        }
+
+    correct_answer_value = correct_answer_doc["guessedTimeInMs"]
+
     pipeline = [
+        { 
+            "$match": { "name": { "$ne": "correct_answer_123" } }  # <-- exclude correct_answer_123
+        },
         {
             "$addFields": {
-                "diff": { "$abs": { "$subtract": ["$guessedTimeInMs", correct_answer] } }
+                "diff": { "$abs": { "$subtract": ["$guessedTimeInMs", correct_answer_value] } }
             }
         },
         { "$sort": { "diff": 1 } },
@@ -36,4 +49,4 @@ async def get_winners(correct_answer):
 
     cursor = mongo.db["guesses"].aggregate(pipeline)
     results = await cursor.to_list(length=3)
-    return results
+    return {"winners": results, "correct_answer": correct_answer_value}
