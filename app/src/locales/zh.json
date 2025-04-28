@@ -2,11 +2,11 @@
   "welcome": "欢迎",
   "attendees": "参与者",
   "start-prompt": "请输入您的名字",
-  "time-prompt": "猜猜演讲总共需要多长时间",
+  "time-prompt": "猜猜新人演讲总共时间多长？",
   "minutes": "分钟",
   "seconds": "秒",
   "milliseconds": "毫秒",
   "submit": "提交",
   "Submit": "提交",
-  "NICOLE & ANSEL": "妍蔡芷 & 李良"
+  "NICOLE & ANSEL": "蔡芷妍 & 李良"
 }
