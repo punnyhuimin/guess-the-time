@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import GuessTable from '../GuessTable';
+import GuessTable from '../components/GuessTable';
 import { getResults } from '../services/getResults';
 import { WinnerResults } from '../types';
 import { formatMsToString } from '../utils';

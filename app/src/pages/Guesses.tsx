@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GuessTable from '../GuessTable';
+import GuessTable from '../components/GuessTable';
 import { getGuesses } from '../services/getGuesses';
 import { Guess } from '../types';
 
@@ -27,7 +27,7 @@ const Guesses: React.FC = () => {
   return (
     <div>
       <h2>Guesses</h2>
-      <GuessTable guesses={guesses} />;
+      <GuessTable guesses={guesses} />
     </div>
   );
 };

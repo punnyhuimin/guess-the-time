@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Guess } from './types';
-import { formatMsToString } from './utils';
+import { Guess } from '../types';
+import { formatMsToString } from '../utils';
 
 interface GuessTableProps {
   guesses: Guess[];
