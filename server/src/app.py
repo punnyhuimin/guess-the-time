@@ -5,7 +5,7 @@ from .database import mongo
 
 app = FastAPI()
 origins = [
-    "https://chatterbox-frontend-ochre.vercel.app",  # Production frontend
+    "https://guess-the-time-red.vercel.app",  # Production frontend
     "http://localhost:5173",  # Local frontend (during development)
 ]
 app.add_middleware(
