@@ -9,6 +9,9 @@ body {
 
 #root {
   --container-padding: 16px;
+  --layer-02: #a79d9d;
+  --layer-03: #858080;
+  --layer-04: #423f3f;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -55,4 +58,8 @@ body {
 input {
   height: 20px;
   padding: 10px 20px;
+  box-shadow: none;
+  border: 1px solid var(--layer-03);
+  border-radius: 5px;
+  background-color: var(--layer-02);
 }
