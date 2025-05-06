@@ -3,12 +3,18 @@ import { useTranslation } from 'react-i18next';
 
 interface TimeSelectProps {
   inputTime: number;
+  maxValue: number;
   inputTimeField: string;
-  handleTimeInputChange: (field: string, value: number) => void;
+  handleTimeInputChange: (
+    field: string,
+    value: number,
+    maxValue: number,
+  ) => void;
 }
 
 const TimeSelect: FC<TimeSelectProps> = ({
   inputTime,
+  maxValue,
   inputTimeField,
   handleTimeInputChange,
 }) => {
@@ -18,7 +24,7 @@ const TimeSelect: FC<TimeSelectProps> = ({
     const value = e.target.value;
     const number = Number(value);
     if (!isNaN(number)) {
-      handleTimeInputChange(inputTimeField, number);
+      handleTimeInputChange(inputTimeField, number, maxValue);
     }
   };
 
@@ -34,19 +40,21 @@ const TimeSelect: FC<TimeSelectProps> = ({
     >
       <span style={{ fontSize: '24px' }}>{t(inputTimeField)}:</span>
       <input
-        type="text"
+        type="number"
+        max={maxValue}
+        min={0}
         value={inputTime}
         onChange={handleChange}
         style={{
-          backgroundColor: 'var(--button-color)',
-          color: 'white',
+          //   backgroundColor: 'var(--button-color)',
+          //   color: 'white',
           padding: '4px 4px',
           borderRadius: '6px',
-          border: '1px solid #ccc',
-          fontSize: '14px',
-          height: '24px',
+          //   border: '1px solid #ccc',
+          //   fontSize: '14px',
+          //   height: '24px',
           width: '24px',
-          textAlign: 'right',
+          //   // textAlign: 'right',
         }}
       />
     </div>

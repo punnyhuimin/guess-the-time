@@ -62,10 +62,20 @@ const Survey = () => {
     });
   };
 
-  const handleTimeInputChange = (field: string, value: number) => {
+  const handleTimeInputChange = (
+    field: string,
+    value: number,
+    maxValue: number,
+  ) => {
+    let ans = 0;
+    if (value <= maxValue) {
+      ans = value;
+    } else {
+      ans = maxValue; // Clamp to 59
+    }
     setInputTime((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: ans,
     }));
   };
 
@@ -95,6 +105,7 @@ const Survey = () => {
           <div>
             <TimeSelect
               inputTime={inputTime.minutes}
+              maxValue={59}
               inputTimeField={'minutes'}
               handleTimeInputChange={handleTimeInputChange}
             />
@@ -103,6 +114,7 @@ const Survey = () => {
             <TimeSelect
               inputTime={inputTime.seconds}
               inputTimeField={'seconds'}
+              maxValue={59}
               handleTimeInputChange={handleTimeInputChange}
             />
           </div>
@@ -110,6 +122,7 @@ const Survey = () => {
             <TimeSelect
               inputTime={inputTime.milliseconds}
               inputTimeField={'milliseconds'}
+              maxValue={999}
               handleTimeInputChange={handleTimeInputChange}
             />
           </div>

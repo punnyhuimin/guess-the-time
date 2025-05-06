@@ -4,22 +4,21 @@ html,
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100vh;
 }
 
 #root {
+  --container-padding: 16px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  --container-padding: 16px;
+  padding: var(--container-padding);
 }
 
 .container {
   display: grid;
   grid-auto-flow: row;
   gap: 32px;
-  padding: var(--container-padding);
 }
 
 .selection-button {
@@ -51,4 +50,9 @@ body {
     opacity: 0.2;
     cursor: not-allowed;
   }
+}
+
+input {
+  height: 20px;
+  padding: 10px 20px;
 }
