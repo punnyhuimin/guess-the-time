@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import GuessTable from '../components/GuessTable';
+import { useEffect, useState } from 'react';
 import { getGuesses } from '../services/getGuesses';
 import { Guess } from '../types';
+import { GuessTableAggrid } from '../components/GuessTableAggrid';
 
 const Guesses: React.FC = () => {
   const [guesses, setGuesses] = useState<Guess[]>([]);
@@ -27,7 +27,7 @@ const Guesses: React.FC = () => {
   return (
     <div>
       <h2>Guesses</h2>
-      <GuessTable guesses={guesses} />
+      <GuessTableAggrid guesses={guesses} />
     </div>
   );
 };

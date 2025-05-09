@@ -1,0 +1,63 @@
+import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
+import { FC, useMemo } from 'react';
+import { Guess } from '../types';
+
+import {
+  AllCommunityModule,
+  ColDef,
+  ModuleRegistry,
+  themeAlpine,
+} from 'ag-grid-community';
+
+// Register all Community features
+ModuleRegistry.registerModules([AllCommunityModule]);
+
+interface GuessTableProps {
+  guesses: Guess[];
+  isResultsTable?: boolean;
+}
+export const GuessTableAggrid: FC<GuessTableProps> = ({ guesses }) => {
+  const rowData = useMemo(() => {
+    if (guesses) return guesses;
+    return [];
+  }, []);
+
+  const colDef: ColDef<Guess>[] = useMemo(() => {
+    return [
+      { field: 'name', sortable: true, filter: true },
+      {
+        field: 'guessedTimeInMs',
+        sortable: true,
+        filter: 'agNumberColumnFilter',
+        valueFormatter: (params: { value: number }) => {
+          const totalMs = params.value;
+          const minutes = Math.floor(totalMs / 60000);
+          const seconds = Math.floor((totalMs % 60000) / 1000);
+          const milliseconds = totalMs % 1000;
+
+          // Format to always show 2-digit seconds and 3-digit ms
+          const paddedSeconds = seconds.toString().padStart(2, '0');
+          const paddedMilliseconds = milliseconds.toString().padStart(3, '0');
+
+          return `${minutes}:${paddedSeconds}.${paddedMilliseconds}`;
+        },
+      },
+    ];
+  }, []);
+
+  return (
+    // Data Grid will fill the size of the parent container
+    <div
+      style={{
+        width: 'calc(100vw - 4 * var(--container-padding))',
+        height: 'calc(100vh - 6 * var(--container-padding))',
+      }}
+    >
+      <AgGridReact<Guess>
+        theme={themeAlpine}
+        rowData={rowData}
+        columnDefs={colDef}
+      />
+    </div>
+  );
+};
