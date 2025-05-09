@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import GuessTable from '../components/GuessTable';
 import { getResults } from '../services/getResults';
 import { WinnerResults } from '../types';
 import { formatMsToString } from '../utils';
+import { GuessTableAggrid } from '../components/GuessTableAggrid';
 
 const Results: React.FC = () => {
   const [winnerResults, setWinnerResults] = useState<WinnerResults>();
@@ -34,7 +34,10 @@ const Results: React.FC = () => {
     <div>
       <h2>Results</h2>
       <h3>Speech Length: {formatMsToString(winnerResults.correct_answer)}</h3>
-      <GuessTable guesses={winnerResults?.winners} isResultsTable={true} />
+      <GuessTableAggrid
+        guesses={winnerResults?.winners}
+        isResultsTable={true}
+      />
     </div>
   );
 };

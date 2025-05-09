@@ -1,7 +1,6 @@
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import { FC, useMemo } from 'react';
 import { Guess } from '../types';
-
 import {
   AllCommunityModule,
   ColDef,
@@ -24,10 +23,20 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({ guesses }) => {
 
   const colDef: ColDef<Guess>[] = useMemo(() => {
     return [
-      { field: 'name', sortable: true, filter: true },
+      {
+        field: 'name',
+        minWidth: 100,
+        width: 150,
+        maxWidth: 250,
+        sortable: true,
+        filter: true,
+      },
       {
         field: 'guessedTimeInMs',
         sortable: true,
+        flex: 1,
+        minWidth: 100,
+        maxWidth: 250,
         filter: 'agNumberColumnFilter',
         valueFormatter: (params: { value: number }) => {
           const totalMs = params.value;
@@ -50,7 +59,7 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({ guesses }) => {
     <div
       style={{
         width: 'calc(100vw - 4 * var(--container-padding))',
-        height: 'calc(100vh - 6 * var(--container-padding))',
+        height: 'calc(100vh - 7 * var(--container-padding))',
       }}
     >
       <AgGridReact<Guess>
