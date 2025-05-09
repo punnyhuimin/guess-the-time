@@ -8,10 +8,6 @@
   color: #000000;
   background-color: #f5ebe1;
 
-  --text-font: 16px;
-  --button-color: #423f3f;
-  --button-text-color: #f5ebe1;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

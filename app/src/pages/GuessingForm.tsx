@@ -16,12 +16,10 @@ const GuessingForm: React.FC = () => {
       >
         <Language />
       </div>
-      <div style={{ paddingTop: '32px' }}>
+      <div style={{ paddingTop: '16px' }}>
         <Title />
       </div>
-      <div>
-        <Survey />
-      </div>
+      <Survey />
     </div>
   );
 };

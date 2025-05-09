@@ -9,9 +9,13 @@ body {
 
 #root {
   --container-padding: 16px;
+  --layer-01: #f5ebe1;
   --layer-02: #a79d9d;
   --layer-03: #858080;
   --layer-04: #423f3f;
+  --text-font: 16px;
+  --button-color: var(--layer-04);
+  --button-text-color: var(--layer-01);
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -28,7 +32,7 @@ body {
   border: 1px solid transparent;
   border-radius: 10%;
   padding: 1em;
-  width: 110px;
+  width: 100px;
   font-family: inherit;
   display: flex;
   justify-content: center;
@@ -44,7 +48,8 @@ body {
   color: black;
   border: 1px solid black;
   border-radius: 5px;
-  width: 110px;
+  width: 100px;
+  font-family: inherit;
   padding: 10px 20px;
   cursor: pointer;
   font-size: var(--text-font);
