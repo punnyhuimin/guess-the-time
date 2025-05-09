@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { submitGuess } from '../services/submitGuess';
 import { QuestionType, ResponseType } from '../types';
 import TimeSelect from './TimeInput';
+import './spinner.css';
 
 const questions: QuestionType[] = [
   { id: 1, text: 'start-prompt', type: 'text' },
@@ -12,6 +13,7 @@ const questions: QuestionType[] = [
 ];
 
 const Survey = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState<ResponseType>({});
   const [inputTime, setInputTime] = useState({
@@ -39,11 +41,15 @@ const Survey = () => {
           inputTime.seconds * 1000 +
           inputTime.milliseconds;
         try {
+          setIsLoading(true);
           await submitGuess(name, guessedTimeInMs);
+          setIsLoading(false);
           navigate('/guesses');
         } catch (error) {
           console.error('Failed to submit guess', error);
           alert('Something went wrong. ❌');
+        } finally {
+          setIsLoading(false);
         }
       }
     }
@@ -139,6 +145,12 @@ const Survey = () => {
         gap: 'var(--container-padding)',
       }}
     >
+      {isLoading ? (
+        <div aria-busy="true" className="modal-loading">
+          <span className="loader" />
+          <span style={{ color: 'white' }}>Submitting...</span>
+        </div>
+      ) : null}
       <motion.div
         key={currentQuestion} // Ensures animation runs when content changes
         initial={{ opacity: 0, x: isNext ? 100 : -100 }}

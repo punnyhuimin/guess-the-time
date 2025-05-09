@@ -8,8 +8,9 @@
   color: #000000;
   background-color: #f5ebe1;
 
-  --button-color: #423f3f;
   --text-font: 16px;
+  --button-color: #423f3f;
+  --button-text-color: #f5ebe1;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -48,17 +49,4 @@ p {
   font-size: 24px;
   margin-top: 0px;
   margin-bottom: 8px;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
