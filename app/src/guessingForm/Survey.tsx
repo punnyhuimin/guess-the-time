@@ -108,30 +108,24 @@ const Survey = () => {
             alignItems: 'center',
           }}
         >
-          <div>
-            <TimeSelect
-              inputTime={inputTime.minutes}
-              maxValue={59}
-              inputTimeField={'minutes'}
-              handleTimeInputChange={handleTimeInputChange}
-            />
-          </div>
-          <div>
-            <TimeSelect
-              inputTime={inputTime.seconds}
-              inputTimeField={'seconds'}
-              maxValue={59}
-              handleTimeInputChange={handleTimeInputChange}
-            />
-          </div>
-          <div>
-            <TimeSelect
-              inputTime={inputTime.milliseconds}
-              inputTimeField={'milliseconds'}
-              maxValue={999}
-              handleTimeInputChange={handleTimeInputChange}
-            />
-          </div>
+          <TimeSelect
+            inputTime={inputTime.minutes}
+            maxValue={59}
+            inputTimeField={'minutes'}
+            handleTimeInputChange={handleTimeInputChange}
+          />
+          <TimeSelect
+            inputTime={inputTime.seconds}
+            inputTimeField={'seconds'}
+            maxValue={59}
+            handleTimeInputChange={handleTimeInputChange}
+          />
+          <TimeSelect
+            inputTime={inputTime.milliseconds}
+            inputTimeField={'milliseconds'}
+            maxValue={999}
+            handleTimeInputChange={handleTimeInputChange}
+          />
         </div>
       );
     }

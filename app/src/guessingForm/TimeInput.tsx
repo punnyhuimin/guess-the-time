@@ -32,13 +32,13 @@ const TimeSelect: FC<TimeSelectProps> = ({
     <div
       style={{
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        width: '60%',
         marginBottom: '8px',
-        width: '200px', // !TODO hardcoded ok?
       }}
     >
-      <span style={{ fontSize: '24px' }}>{t(inputTimeField)}:</span>
+      <span style={{ fontSize: '24px', textAlign: 'left', flexGrow: 1 }}>
+        {t(inputTimeField)}:
+      </span>
       <input
         type="number"
         max={maxValue}
@@ -46,15 +46,10 @@ const TimeSelect: FC<TimeSelectProps> = ({
         value={inputTime}
         onChange={handleChange}
         style={{
-          //   backgroundColor: 'var(--button-color)',
-          //   color: 'white',
           padding: '4px 4px',
           borderRadius: '6px',
-          //   border: '1px solid #ccc',
-          //   fontSize: '14px',
-          //   height: '24px',
-          width: '24px',
-          //   // textAlign: 'right',
+          width: '60px', // Adjust width of the input as needed
+          textAlign: 'right', // Align the number text to the right
         }}
       />
     </div>
