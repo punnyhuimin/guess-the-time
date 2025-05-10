@@ -20,7 +20,7 @@ def serialize_guess(guess) -> dict:
 async def get_all_guesses():
     logger.info(f"Connecting to: {mongo.uri}")
     collection = mongo.db["guesses"]
-    cursor = collection.find()
+    cursor = collection.find({"name": {"$ne": "correct_answer_123"}})
     return [serialize_guess(g) async for g in cursor]
 
 async def get_winners():
