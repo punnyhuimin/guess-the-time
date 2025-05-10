@@ -55,7 +55,6 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({ guesses }) => {
   }, []);
 
   return (
-    // Data Grid will fill the size of the parent container
     <div
       style={{
         width: 'calc(100vw - 4 * var(--container-padding))',

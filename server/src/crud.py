@@ -35,7 +35,7 @@ async def get_winners():
 
     pipeline = [
         { 
-            "$match": { "name": { "$ne": "correct_answer_123" } }  # <-- exclude correct_answer_123
+            "$match": { "name": { "$ne": "correct_answer_123" } }  # exclude correct_answer_123
         },
         {
             "$addFields": {

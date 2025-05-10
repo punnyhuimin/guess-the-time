@@ -48,8 +48,8 @@ const TimeSelect: FC<TimeSelectProps> = ({
         style={{
           padding: '4px 4px',
           borderRadius: '6px',
-          width: '60px', // Adjust width of the input as needed
-          textAlign: 'right', // Align the number text to the right
+          width: '60px',
+          textAlign: 'right',
         }}
       />
     </div>
