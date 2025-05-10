@@ -33,6 +33,7 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({ guesses }) => {
       },
       {
         field: 'guessedTimeInMs',
+        headerName: 'Guess',
         sortable: true,
         flex: 1,
         minWidth: 100,

@@ -1,6 +1,7 @@
 export interface Guess {
   name: string;
   guessedTimeInMs: number;
+  createdAt: Date;
   diff?: number;
 }
 
