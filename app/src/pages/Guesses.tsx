@@ -23,7 +23,6 @@ const Guesses: React.FC = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-
   return (
     <div>
       <h2>Guesses</h2>

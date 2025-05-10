@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 async def save_guess(guess):
     collection = mongo.db["guesses"] 
     guess_data = guess.dict()
-    guess_data["createdAt"] = datetime.now(timezone.utc)
+    guess_data["createdAt"] = datetime.now(timezone.utc).isoformat()
     result = await collection.insert_one(guess_data)
     return str(result.inserted_id)
 
@@ -13,6 +13,7 @@ def serialize_guess(guess) -> dict:
     return {
         "id": str(guess["_id"]),
         "name": guess["name"],
+        "createdAt": guess["createdAt"],
         "guessedTimeInMs": guess["guessedTimeInMs"],
     }
 

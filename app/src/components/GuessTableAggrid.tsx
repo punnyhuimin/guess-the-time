@@ -52,6 +52,21 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({ guesses }) => {
           return `${minutes}:${paddedSeconds}.${paddedMilliseconds}`;
         },
       },
+      {
+        field: 'createdAt',
+        headerName: 'Submitted Date',
+        sortable: true,
+        valueFormatter: (params) => {
+          const date = new Date(params.value);
+          console.log(date);
+          return date.toLocaleString('en-SG', {
+            timeZone: 'Asia/Singapore',
+            dateStyle: 'medium',
+            timeStyle: 'short',
+          });
+        },
+        minWidth: 180,
+      },
     ];
   }, []);
 
