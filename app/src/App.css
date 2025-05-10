@@ -69,3 +69,7 @@ input {
   border-radius: 5px;
   background-color: var(--layer-02);
 }
+
+.left-align {
+  text-align: left !important;
+}

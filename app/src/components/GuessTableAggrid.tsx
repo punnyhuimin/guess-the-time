@@ -27,19 +27,18 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
   const sharedColDefs: ColDef<Guess>[] = [
     {
       field: 'name',
-      minWidth: 100,
-      width: 250,
-      maxWidth: 250,
+      flex: 2,
+      minWidth: 150,
       sortable: true,
       filter: true,
+      cellClass: 'left-align',
     },
     {
       field: 'guessedTimeInMs',
       headerName: 'Guess',
       sortable: true,
       flex: 1,
-      minWidth: 100,
-      maxWidth: 200,
+      minWidth: 120,
       filter: 'agNumberColumnFilter',
       valueFormatter: (params: { value: number }) => {
         const totalMs = params.value;
@@ -52,11 +51,14 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
 
         return `${minutes}:${paddedSeconds}.${paddedMilliseconds}`;
       },
+      cellClass: 'left-align',
     },
     {
       field: 'createdAt',
       headerName: 'Submitted Date',
       sortable: true,
+      flex: 1,
+      minWidth: 200,
       valueFormatter: (params) => {
         const date = new Date(params.value);
         return date.toLocaleString('en-SG', {
@@ -65,7 +67,7 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
           timeStyle: 'short',
         });
       },
-      minWidth: 180,
+      cellClass: 'left-align',
     },
   ];
 
@@ -79,7 +81,8 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
         field: 'diff',
         headerName: 'Difference',
         sortable: true,
-        minWidth: 100,
+        minWidth: 120,
+        cellClass: 'left-align',
         valueFormatter: (params: { value: number }) => {
           const totalMs = params.value;
           const minutes = Math.floor(totalMs / 60000);
@@ -94,56 +97,9 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
       },
       sharedColDefs[2],
     ],
+
     [],
   );
-
-  // const colDef: ColDef<Guess>[] = useMemo(() => {
-  //   return [
-  //     {
-  //       field: 'name',
-  //       minWidth: 100,
-  //       width: 150,
-  //       maxWidth: 250,
-  //       sortable: true,
-  //       filter: true,
-  //     },
-  //     {
-  //       field: 'guessedTimeInMs',
-  //       headerName: 'Guess',
-  //       sortable: true,
-  //       flex: 1,
-  //       minWidth: 100,
-  //       maxWidth: 250,
-  //       filter: 'agNumberColumnFilter',
-  //       valueFormatter: (params: { value: number }) => {
-  //         const totalMs = params.value;
-  //         const minutes = Math.floor(totalMs / 60000);
-  //         const seconds = Math.floor((totalMs % 60000) / 1000);
-  //         const milliseconds = totalMs % 1000;
-
-  //         // Format to always show 2-digit seconds and 3-digit ms
-  //         const paddedSeconds = seconds.toString().padStart(2, '0');
-  //         const paddedMilliseconds = milliseconds.toString().padStart(3, '0');
-
-  //         return `${minutes}:${paddedSeconds}.${paddedMilliseconds}`;
-  //       },
-  //     },
-  //     {
-  //       field: 'createdAt',
-  //       headerName: 'Submitted Date',
-  //       sortable: true,
-  //       valueFormatter: (params) => {
-  //         const date = new Date(params.value);
-  //         return date.toLocaleString('en-SG', {
-  //           timeZone: 'Asia/Singapore',
-  //           dateStyle: 'medium',
-  //           timeStyle: 'short',
-  //         });
-  //       },
-  //       minWidth: 180,
-  //     },
-  //   ];
-  // }, []);
 
   return (
     <div
@@ -154,6 +110,7 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
     >
       <AgGridReact<Guess>
         theme={themeAlpine}
+        domLayout="autoHeight"
         rowData={rowData}
         columnDefs={isResultsTable ? resultsTableCols : guessesTableCols}
       />

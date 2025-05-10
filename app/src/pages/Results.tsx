@@ -31,9 +31,15 @@ const Results: React.FC = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <h2>Results</h2>
-      <h3>Speech Length: {formatMsToString(winnerResults.correct_answer)}</h3>
+      <p>Speech Length: {formatMsToString(winnerResults.correct_answer)}</p>
       <GuessTableAggrid
         guesses={winnerResults?.winners}
         isResultsTable={true}
