@@ -1,10 +1,12 @@
 from loguru import logger
 from src.database import mongo
+from datetime import datetime, timezone
 
 async def save_guess(guess):
-    print(guess)
     collection = mongo.db["guesses"] 
-    result = await collection.insert_one(guess.dict())
+    guess_data = guess.dict()
+    guess_data["createdAt"] = datetime.now(timezone.utc)
+    result = await collection.insert_one(guess_data)
     return str(result.inserted_id)
 
 def serialize_guess(guess) -> dict:

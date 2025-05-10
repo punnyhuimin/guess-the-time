@@ -1,4 +1,4 @@
-import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
+import { AgGridReact } from 'ag-grid-react';
 import { FC, useMemo } from 'react';
 import { Guess } from '../types';
 import {
