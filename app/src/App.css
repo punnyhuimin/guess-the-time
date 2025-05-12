@@ -62,6 +62,7 @@ body {
 }
 
 input {
+  font-size: var(--text-font);
   height: 20px;
   padding: 10px 20px;
   box-shadow: none;

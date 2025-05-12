@@ -14,7 +14,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.8",
-    "@mui/material": "^6.4.8",
+    "@mui/material": "^6.4.11",
     "ag-grid-react": "^33.2.4",
     "axios": "^1.8.4",
     "i18next": "^24.2.2",
