@@ -44,12 +44,18 @@ async def get_winners():
             }
         },
         { "$sort": { "diff": 1 } },
-        { "$limit": 10 },
+        {
+            "$sort": {
+                "diff": 1,
+                "createdAt": 1  # Secondary sort by createdAt
+            }
+        },
+        { "$limit": 3 },
         {
             "$project": {"_id": 0, "name": 1, "guessedTimeInMs": 1, "createdAt": 1, "diff": 1}
         }
     ]
 
     cursor = mongo.db["guesses"].aggregate(pipeline)
-    results = await cursor.to_list(length=5)
+    results = await cursor.to_list(length=3)
     return {"winners": results, "correct_answer": correct_answer_value}
