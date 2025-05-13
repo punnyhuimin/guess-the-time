@@ -104,7 +104,7 @@ export const GuessTableAggrid: FC<GuessTableProps> = ({
   return (
     <div
       style={{
-        width: 'calc(100vw - 4 * var(--container-padding))',
+        width: 'calc(100vw - 2 * var(--container-padding))',
         height: 'calc(100vh - 7 * var(--container-padding))',
       }}
     >

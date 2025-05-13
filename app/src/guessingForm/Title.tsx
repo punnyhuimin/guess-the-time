@@ -4,10 +4,10 @@ function Title() {
   const { t } = useTranslation();
 
   return (
-    <>
-      <h1 style={{ marginBottom: '16px' }}>{t('NICOLE & ANSEL')}</h1>
+    <div className="child-container">
+      <h1>{t('NICOLE & ANSEL')}</h1>
       <p>{'#NICANS2025'}</p>
-    </>
+    </div>
   );
 }
 

@@ -16,16 +16,24 @@ body {
   --text-font: 16px;
   --button-color: var(--layer-04);
   --button-text-color: var(--layer-01);
+
   max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
+  width: calc(100vw - 2 * var(--container-padding));
   padding: var(--container-padding);
 }
 
 .container {
-  display: grid;
-  grid-auto-flow: row;
-  gap: 32px;
+  display: flex;
+  gap: var(--container-padding);
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.child-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--container-padding);
 }
 
 .selection-button {
