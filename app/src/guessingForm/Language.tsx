@@ -10,7 +10,7 @@ function Language() {
   };
 
   return (
-    <>
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
       <Button
         variant="text"
         startIcon={<LanguageIcon />}
@@ -19,7 +19,7 @@ function Language() {
       >
         {i18n.language === 'en' ? 'ENG' : '中文'}
       </Button>
-    </>
+    </div>
   );
 }
 

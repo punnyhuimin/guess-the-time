@@ -29,14 +29,8 @@ const TimeSelect: FC<TimeSelectProps> = ({
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '60%',
-        marginBottom: '8px',
-      }}
-    >
-      <span style={{ fontSize: '24px', textAlign: 'left', flexGrow: 1 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <span style={{ fontSize: '24px', textAlign: 'left', flex: 1 }}>
         {t(inputTimeField)}:
       </span>
       <input
@@ -46,8 +40,8 @@ const TimeSelect: FC<TimeSelectProps> = ({
         value={inputTime}
         onChange={handleChange}
         style={{
-          padding: '4px 4px',
-          borderRadius: '6px',
+          padding: '8px 8px',
+          borderRadius: '8px',
           width: '60px',
           textAlign: 'right',
         }}

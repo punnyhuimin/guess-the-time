@@ -104,8 +104,8 @@ const Survey = () => {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            gap: '8px',
+            paddingBottom: 'var(--container-padding)',
           }}
         >
           <TimeSelect
@@ -132,13 +132,7 @@ const Survey = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'var(--container-padding)',
-      }}
-    >
+    <div className="child-container">
       {isLoading ? (
         <div aria-busy="true" className="modal-loading">
           <span className="loader" />
@@ -151,6 +145,14 @@ const Survey = () => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: isNext ? -100 : 100 }}
         transition={{ duration: 0.3 }}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--container-padding)',
+          alignItems: 'center',
+          height: '100%',
+          width: '100%',
+        }}
       >
         <h2>{t(questions[currentQuestion].text)}</h2>
         {renderInput()}
@@ -159,6 +161,7 @@ const Survey = () => {
         style={{
           display: 'flex',
           justifyContent: 'center',
+
           gap: 'var(--container-padding)',
         }}
       >
