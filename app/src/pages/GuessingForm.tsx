@@ -6,20 +6,21 @@ import Title from '../guessingForm/Title';
 
 const GuessingForm: React.FC = () => {
   return (
-    <div className="container" style={{ minWidth: '100%' }}>
+    <div className="container">
+      <Language />
       <div
         style={{
+          height: '100%',
+          alignItems: 'center',
           display: 'flex',
-          paddingTop: '32px',
-          justifyContent: 'flex-end',
+          flexDirection: 'column',
+          paddingTop: 'calc(2 * var(--container-padding))',
+          gap: 'calc(4 * var(--container-padding))',
         }}
       >
-        <Language />
-      </div>
-      <div style={{ paddingTop: '16px' }}>
         <Title />
+        <Survey />
       </div>
-      <Survey />
     </div>
   );
 };
