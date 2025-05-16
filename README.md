@@ -19,11 +19,13 @@ This app is a fun guessing game designed for a wedding event. Users will enter t
 ## How to Run Locally
 
 1. Clone this repository
-2. Add a .env file in the server directory that contains your MongoDB credentials and database name
+2. Add a .env file in the server directory that contains your MongoDB credentials, database name, and cluster host
 3. cd to the location this repo is stored on your machine and run `docker-compose up --build`
 4. Alternatively, if you want to run without Docker, use the following
    - navigate to the server: `cd server`
    - install dependencies: `pip install -r requirements.txt`
+   - start server: `python main.py`
    - navigate to the ui: `cd app`
    - install dependencies: `npm install`
+   - start ui: `npm run dev`
 5. Open your browser and go to http://localhost:5173 to access the frontend and http://localhost:8000 to interact with the backend API.
