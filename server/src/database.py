@@ -30,6 +30,6 @@ class MongoDB:
 
 # Initialize MongoDB instance
 mongo = MongoDB(
-    uri=f"mongodb+srv://{os.getenv('MONGO_USERNAME')}:{os.getenv('MONGO_PASSWORD')}{os.getenv('MONGO_CLUSTER_HOST')}/{os.getenv('MONGO_DB')}?retryWrites=true&w=majority",
+    uri=f"mongodb+srv://{os.getenv('MONGO_USERNAME')}:{os.getenv('MONGO_PASSWORD')}@{os.getenv('MONGO_CLUSTER_HOST')}/{os.getenv('MONGO_DB')}?retryWrites=true&w=majority",
     db_name=os.getenv("MONGO_DB"),
 )
